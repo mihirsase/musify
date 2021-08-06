@@ -18,6 +18,15 @@ dependencies:
   # App theme
   flutter_neumorphic: ^3.1.0
 
+  # Blocs
+  flutter_bloc: 7.0.0
+
+  # Fonts
+  google_fonts: 2.1.0
+
+  # Save local variables
+  shared_preferences: 2.0.6
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
