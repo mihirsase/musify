@@ -48,4 +48,20 @@ class Pallete {
   static Color get iconLight {
     return Color(0xFF9fafc9);
   }
+
+  static Color get primaryTextDark {
+    return Color(0xFFa4a6a7);
+  }
+
+  static Color get secondaryTextDark {
+    return Color(0xFF5f6265);
+  }
+
+  static Color get primaryTextLight {
+    return Color(0xFF717d96);
+  }
+
+  static Color get secondaryTextLight {
+    return Color(0xFFb2bece);
+  }
 }

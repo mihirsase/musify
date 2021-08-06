@@ -3,7 +3,7 @@ import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 
 class IconButtonAtom extends StatelessWidget {
   final void Function() onPressed;
-  final Icon icon;
+  final Widget icon;
   final Color? color;
   final NeumorphicShape shape;
 

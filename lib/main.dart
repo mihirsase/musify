@@ -20,7 +20,7 @@ class _MusifyState extends State<Musify> {
     return NeumorphicApp(
       debugShowCheckedModeBanner: false,
       title: 'Musify',
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: NeumorphicThemeData(
         baseColor: Pallete.lightBackground,
         lightSource: LightSource.topLeft,
