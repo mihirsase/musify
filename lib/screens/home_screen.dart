@@ -43,9 +43,6 @@ class _HomeScreenState extends State<HomeScreen> {
                         fontSize: 18,
                       ),
                     ),
-                    SizedBox(
-                      height: 8,
-                    ),
                     Text(
                       'Favourite songs',
                       style: TextStyle(
@@ -107,21 +104,35 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          NeumorphicText(
-            "Musify",
-            style: NeumorphicStyle(
-              depth: 1,
-              shape: NeumorphicShape.convex,
-              color: NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffffffff),
-              shadowLightColor:
-                  NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffc0c8d6),
-              shadowDarkColor:
-                  NeumorphicTheme.isUsingDark(context) ? Color(0xff32363b) : Color(0xffc0c8d6),
-            ),
-            textStyle: NeumorphicTextStyle(
-              fontSize: 38,
-              fontWeight: FontWeight.bold,
-            ),
+          // NeumorphicText(
+          //   "Musify",
+          //   style: NeumorphicStyle(
+          //     depth: 1,
+          //     shape: NeumorphicShape.convex,
+          //     color: NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffffffff),
+          //     shadowLightColor:
+          //         NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffc0c8d6),
+          //     shadowDarkColor:
+          //         NeumorphicTheme.isUsingDark(context) ? Color(0xff32363b) : Color(0xffc0c8d6),
+          //   ),
+          //   textStyle: NeumorphicTextStyle(
+          //     fontSize: 38,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          // Text(
+          //   'Musify',
+          //   style: TextStyle(
+          //     fontSize: 38,
+          //     color: NeumorphicTheme.isUsingDark(context)
+          //         ? Pallete.primaryTextDark
+          //         : Pallete.secondaryTextDark,
+          //     fontWeight: FontWeight.bold,
+          //   ),
+          // ),
+          Image.asset(
+            'lib/assets/logo.png',
+            height: 50,
           ),
           IconButtonAtom(
             onPressed: () {
