@@ -26,6 +26,9 @@ dependencies:
 
   # Save local variables
   shared_preferences: 2.0.6
+  
+  # Rest requests
+  dio: ^4.0.0
 
 dev_dependencies:
   flutter_test:

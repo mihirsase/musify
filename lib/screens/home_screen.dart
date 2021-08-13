@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:musify/components/atoms/icon_button_atom.dart';
 import 'package:musify/models/album.dart';
+import 'package:musify/screens/album_screen.dart';
 import 'package:musify/themer/pallete.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,7 +26,7 @@ class _HomeScreenState extends State<HomeScreen> {
       children: [
         _appbar,
         Container(
-          padding: EdgeInsets.all(18),
+          padding: EdgeInsets.symmetric(horizontal: 10),
           child: Column(
             children: [
               Align(
@@ -92,6 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
+        SizedBox(
+          height: 12,
+        ),
         _recommendation,
       ],
     );
@@ -99,11 +103,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget get _appbar {
     return Container(
-      padding: EdgeInsets.all(18),
+      padding: EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SizedBox.shrink(),
+          NeumorphicText(
+            "Musify",
+            style: NeumorphicStyle(
+              depth: 1,
+              shape: NeumorphicShape.convex,
+              color: NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffffffff),
+              shadowLightColor:
+                  NeumorphicTheme.isUsingDark(context) ? Color(0xff0c0e0f) : Color(0xffc0c8d6),
+              shadowDarkColor:
+                  NeumorphicTheme.isUsingDark(context) ? Color(0xff32363b) : Color(0xffc0c8d6),
+            ),
+            textStyle: NeumorphicTextStyle(
+              fontSize: 38,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
           IconButtonAtom(
             onPressed: () {
               NeumorphicTheme.of(context)!.themeMode =
@@ -116,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 size: 24,
               ),
             ),
-          )
+          ),
         ],
       ),
     );
@@ -130,12 +149,21 @@ class _HomeScreenState extends State<HomeScreen> {
       childAspectRatio: 0.76,
       crossAxisSpacing: 14,
       mainAxisSpacing: 18,
-      padding: EdgeInsets.all(18),
+      padding: EdgeInsets.all(10),
       children: [
         ...recommendations.map(
           (final Album album) => NeumorphicButton(
             padding: EdgeInsets.zero,
-            onPressed: (){},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AlbumScreen(
+                    album: album,
+                  ),
+                ),
+              );
+            },
             style: NeumorphicStyle(
                 shape: NeumorphicShape.convex,
                 lightSource: LightSource.topLeft,
