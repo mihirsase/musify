@@ -5,12 +5,14 @@ class IconButtonAtom extends StatelessWidget {
   final void Function() onPressed;
   final Widget icon;
   final Color? color;
+  final double padding;
   final NeumorphicShape shape;
 
   IconButtonAtom({
     required this.onPressed,
     required this.icon,
     this.color,
+    this.padding = 0,
     this.shape = NeumorphicShape.flat,
   });
 
@@ -22,7 +24,10 @@ class IconButtonAtom extends StatelessWidget {
         boxShape: NeumorphicBoxShape.circle(),
         shape: shape,
       ),
-      child: icon,
+      child: Padding(
+        padding: EdgeInsets.all(padding),
+        child: icon,
+      ),
       onPressed: onPressed,
     );
   }

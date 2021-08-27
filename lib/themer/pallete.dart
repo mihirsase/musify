@@ -64,4 +64,12 @@ class Pallete {
   static Color get secondaryTextLight {
     return Color(0xFFb2bece);
   }
+
+  static Color get lightAccent {
+    return Color(0xFF85A4FE);
+  }
+
+  static Color get darkAccent {
+    return Color(0xFFe93e17);
+  }
 }

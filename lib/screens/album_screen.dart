@@ -7,6 +7,7 @@ import 'package:musify/bloc/album/album_state.dart';
 import 'package:musify/components/atoms/icon_button_atom.dart';
 import 'package:musify/models/album.dart';
 import 'package:musify/models/song.dart';
+import 'package:musify/screens/player_screen.dart';
 import 'package:musify/themer/pallete.dart';
 
 class AlbumScreen extends StatefulWidget {
@@ -176,7 +177,17 @@ class _AlbumScreenState extends State<AlbumScreen> {
         ),
       ),
       trailing: IconButtonAtom(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlayerScreen(
+                song: song,
+                albumArt: widget.album.albumArt!,
+              ),
+            ),
+          );
+        },
         icon: Icon(
           Icons.play_arrow,
           size: 20,
