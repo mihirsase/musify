@@ -130,7 +130,16 @@ class _HomeScreenState extends State<HomeScreen> {
           //     fontWeight: FontWeight.bold,
           //   ),
           // ),
-          SizedBox.shrink(),
+          Text(
+            'Musify',
+            style: TextStyle(
+              fontSize: 34,
+              color:
+                  NeumorphicTheme.isUsingDark(context) ? Pallete.darkAccent : Pallete.lightAccent,
+              fontWeight: FontWeight.bold,
+              fontFamily: "Parisienne"
+            ),
+          ),
           IconButtonAtom(
             onPressed: () {
               NeumorphicTheme.of(context)!.themeMode =
