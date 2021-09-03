@@ -30,6 +30,9 @@ dependencies:
   # Rest requests
   dio: ^4.0.0
 
+  # Play audio
+  just_audio: ^0.9.9
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -130,10 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
           //     fontWeight: FontWeight.bold,
           //   ),
           // ),
-          Image.asset(
-            'lib/assets/logo.png',
-            height: 50,
-          ),
+          SizedBox.shrink(),
           IconButtonAtom(
             onPressed: () {
               NeumorphicTheme.of(context)!.themeMode =

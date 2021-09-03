@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
+import 'package:musify/bloc/player/player_bloc.dart';
+import 'package:musify/bloc/player/player_event.dart';
+import 'package:musify/bloc/player/player_state.dart';
 import 'package:musify/components/atoms/icon_button_atom.dart';
 import 'package:musify/models/song.dart';
 import 'package:musify/themer/pallete.dart';
@@ -19,17 +23,52 @@ class PlayerScreen extends StatefulWidget {
 }
 
 class _PlayerScreenState extends State<PlayerScreen> {
+  late PlayerBloc _playerBloc;
+
+  @override
+  void initState() {
+    _playerBloc = PlayerBloc(song: widget.song);
+    _playerBloc.add(LoadPlayer());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: NeumorphicTheme.baseColor(context),
-        body: _body(),
+    return BlocProvider<PlayerBloc>(
+      create: (final BuildContext _) {
+        return _playerBloc;
+      },
+      child: BlocBuilder<PlayerBloc, AudioPlayerState>(
+        builder: (
+          final BuildContext _,
+          final AudioPlayerState state,
+        ) {
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: NeumorphicTheme.baseColor(context),
+              body: WillPopScope(
+                  onWillPop: () async {
+                    _playerBloc.add(Reload());
+                    return true;
+                  },
+                  child: _body(state)),
+            ),
+          );
+        },
       ),
     );
   }
 
-  Widget _body() {
+  Widget _body(final AudioPlayerState state) {
+    if (state is PlayerLoading) {
+      return Center(
+        child: CircularProgressIndicator(
+          color: NeumorphicTheme.isUsingDark(context)
+              ? Pallete.lightBackground
+              : Pallete.darkBackground,
+        ),
+      );
+    }
     return Column(
       children: [
         _appBar,
@@ -83,6 +122,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                           : Pallete.primaryTextLight,
                       fontSize: 28,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: 4,
@@ -117,7 +157,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '1:21',
+                            _playerBloc.getFormattedDuration(_playerBloc.songPosition),
                             style: TextStyle(
                               color: NeumorphicTheme.isUsingDark(context)
                                   ? Pallete.secondaryTextDark
@@ -126,7 +166,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                             ),
                           ),
                           Text(
-                            '3:41',
+                            _playerBloc.getFormattedDuration(_playerBloc.songDuration),
                             style: TextStyle(
                               color: NeumorphicTheme.isUsingDark(context)
                                   ? Pallete.secondaryTextDark
@@ -140,7 +180,7 @@ class _PlayerScreenState extends State<PlayerScreen> {
                         height: 12,
                       ),
                       NeumorphicProgress(
-                        percent: 0.5,
+                        percent: _playerBloc.progressPercentage,
                         style: ProgressStyle(
                           depth: 3,
                           accent: NeumorphicTheme.isUsingDark(context)
@@ -163,9 +203,15 @@ class _PlayerScreenState extends State<PlayerScreen> {
                       padding: 6,
                     ),
                     IconButtonAtom(
-                      onPressed: () {},
+                      onPressed: () {
+                        if (_playerBloc.audioPlayer.playing) {
+                          _playerBloc.add(Pause());
+                        } else {
+                          _playerBloc.add(Play());
+                        }
+                      },
                       icon: Icon(
-                        Icons.pause,
+                        _playerBloc.audioPlayer.playing ? Icons.pause : Icons.play_arrow,
                         color: Pallete.white,
                         size: 30,
                       ),
